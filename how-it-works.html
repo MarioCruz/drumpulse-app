@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How DrumPulse works — Apple Watch drum timing &amp; workout tracking</title>
+<meta name="description" content="How DrumPulse turns wrist motion into drum-hit detection, timing grades, dynamics, and a Health workout — and why it doesn't matter which hand wears the watch.">
+<link rel="canonical" href="https://mariocruz.github.io/drumpulse-app/how-it-works.html">
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/style.css">
+<meta property="og:title" content="How DrumPulse works">
+<meta property="og:description" content="Wrist motion → drum hits → timing grades, dynamics, and a Health workout.">
+<meta property="og:image" content="assets/og.png">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html" style="color:inherit"><img src="assets/icon.png" alt="DrumPulse icon">DrumPulse</a>
+    <nav>
+      <a href="how-it-works.html">How it works</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:46px;padding-bottom:10px">
+  <p class="eyebrow">How it works</p>
+  <h1 style="font-size:36px;letter-spacing:-.8px;margin:0 0 10px">From wrist motion to a timing coach</h1>
+  <p class="lead">DrumPulse reads the motion of your snare hand, turns every strike into data, and gives you two things at once: a real fitness record and an honest report on your time. Here's what each part does.</p>
+</div>
+
+<div class="wrap" style="padding-bottom:50px">
+
+  <div class="topic">
+    <h3><span class="ic">▶️</span> Starting a session</h3>
+    <p>On the watch, pick a mode and tap <strong>Start</strong> — or double-tap your fingers (Series 9 / Ultra 2) to start hands-free while holding sticks. Play, then stop to see your recap. Every session is also saved to Apple Health as a workout, so it counts toward your activity rings.</p>
+    <div class="sub">The two modes</div>
+    <ul>
+      <li><strong>Metronome</strong> — set a tempo and every hit is graded against a steady click, like a timing trainer.</li>
+      <li><strong>Free Play</strong> — no click. DrumPulse learns your own recent groove and flags when you speed up or slow down relative to yourself.</li>
+    </ul>
+    <p>An optional <strong>count-in</strong> (four beats) plays first so you can lock in before grading starts.</p>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">✋</span> Which hand wears the watch?</h3>
+    <p>Short answer: for <strong>detecting</strong> your hits, it doesn't matter. For <strong>what you're measuring</strong>, it does.</p>
+    <div class="sub">Detection is hand-agnostic</div>
+    <p>DrumPulse turns each strike into a single number — the <strong>strength</strong> of the hit — from the magnitude of your wrist's acceleration:</p>
+    <div class="formula">strength = √(x² + y² + z²)</div>
+    <p>That magnitude is <strong>rotation-invariant</strong>: it's the same whether the watch is on your left or right wrist, and regardless of crown orientation. A strike spikes it the same way either way. So knowing the hand wouldn't make detection any more accurate — which is exactly why DrumPulse never asks, and there's nothing to configure.</p>
+    <div class="sub">But the hand decides which voice you measure</div>
+    <p>The catch is that the watch only sees the hits of <strong>the hand it's on</strong>. So the hand you wear it on decides which voice DrumPulse is grading:</p>
+    <ul>
+      <li><strong>Snare / backbeat hand</strong> — you're grading your backbeats. This is usually what a drummer wants for timing.</li>
+      <li><strong>Lead / hi-hat hand</strong> — you're grading the faster ostinato stream, and you'll reach the one-handed sixteenth-note ceiling (~125 BPM) sooner.</li>
+    </ul>
+    <p>So it's a <strong>coaching distinction, not a setting</strong>. Pick the wrist based on the voice you care about — most of the time, that's your snare hand.</p>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">🎯</span> Your timing &amp; groove score</h3>
+    <p>The <strong>groove score</strong> (0–100) rates how tight your timing was overall.</p>
+    <ul>
+      <li><strong>Rushing</strong> — you landed ahead of the beat (shown as −, early).</li>
+      <li><strong>Dragging</strong> — you landed behind the beat (shown as +, late).</li>
+      <li><strong>On time</strong> — right in the pocket.</li>
+    </ul>
+    <p><strong>Mean deviation</strong> is your average lean, early or late. <strong>Steadiness (jitter)</strong> is how much your timing scatters around the beat — lower is tighter, even if your average looks perfect.</p>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">📈</span> Accent lag</h3>
+    <p>Do your loud hits land at a different time than your soft ones? Accent lag compares the average timing of your accents vs your ghost notes across the whole session. Positive means accents drag behind the beat; negative means they push ahead; near zero is an even touch. It's a common, hard-to-feel habit the groove score alone hides.</p>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">💪</span> Dynamics: ghost, body, accent</h3>
+    <p>Every hit is sorted into <strong>ghost</strong> (soft), <strong>body</strong> (medium), and <strong>accent</strong> (loud) — measured relative to your own playing strength, not a fixed volume. So a hard hitter isn't graded as all-accents, and a light player's taps aren't all-ghosts. It shows the light and shade in a set.</p>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">🌊</span> Set arc</h3>
+    <p>Your timing across the whole session, one point per minute. The line rides above or below the centre ("on beat") line as you push or drag. It answers what a single average can't: did you tighten up or drift as the set went on?</p>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">🎼</span> Songs (per-song breakdown)</h3>
+    <p>In Free Play, a long set is split into songs at the silences between them, then re-merged where the tempo stayed the same (so a mid-song pause isn't counted as a new song). Each row shows that song's tempo and average timing.</p>
+    <p>It's a <strong>best-guess split, not exact</strong> — from wrist motion alone, a long mid-song pause or two songs at the same tempo can fool it. Treat the count as an estimate.</p>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">🔥</span> Effort</h3>
+    <p>The physical side of the session — total hits, average tempo, duration, calories, heart rate, and <strong>hit power</strong> (your average peak acceleration, in g). These count every hit, warm-up included.</p>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">📊</span> Trends &amp; personal bests</h3>
+    <p>The Trends tab tracks you across sessions: groove score, accent lag, and steadiness over time — watch the trend, not any single bar. Greener and tighter over time means you're improving. <strong>Personal bests</strong> holds your records: highest groove, most hits, longest session, fastest tempo, and longest run of consecutive on-time hits.</p>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">🎚️</span> Metronome &amp; detection settings</h3>
+    <ul>
+      <li><strong>Subdivision</strong> — which note grid the metronome grades against. Auto infers it per hit from how you're playing.</li>
+      <li><strong>Click dropout</strong> — mutes the click for some bars so you practice holding time through silence, then checks how you re-enter.</li>
+      <li><strong>Strong haptic</strong> — a firmer wrist pulse on the downbeat instead of the light system click.</li>
+      <li><strong>Sensitivity &amp; calibration</strong> — how hard a motion must be to count as a hit. Calibration sets it for you: tap eight times and DrumPulse reads your real strikes.</li>
+    </ul>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">⏸️</span> Pause &amp; resume</h3>
+    <p>Tap to freeze a session for a water break — time, calories, and grading all pause (and the Health workout pauses too). A break doesn't inflate your session, and it counts as a fresh tempo baseline when you resume.</p>
+  </div>
+
+  <div class="topic">
+    <h3><span class="ic">🔒</span> Your data stays yours</h3>
+    <p>No accounts, no tracking, no analytics, no servers. Motion and heart-rate data are used on-device only and never leave it; sessions sync solely between your own watch and iPhone over Apple's encrypted connection. See the <a href="privacy.html">privacy policy</a>.</p>
+  </div>
+
+  <p style="margin-top:30px"><a class="btn ghost" href="faq.html">Read the FAQ →</a></p>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p>DrumPulse · Made by Mario The Maker · <a href="mailto:mario@mariocruz.net">mario@mariocruz.net</a></p>
+    <p><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a> · <a href="faq.html">FAQ</a> · <a href="privacy.html">Privacy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

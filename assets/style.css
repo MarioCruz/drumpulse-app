@@ -76,6 +76,29 @@ table.modes td b{color:var(--brand)}
 footer.site{border-top:1px solid var(--line);padding:34px 0 56px;color:var(--dim2);font-size:14px;text-align:center}
 footer.site a{color:var(--dim)}
 
+/* topic cards (how-it-works) */
+.topic{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}
+.topic h3{display:flex;align-items:center;gap:10px;font-size:18px;margin:0 0 10px}
+.topic h3 .ic{font-size:22px}
+.topic p{color:#d7d7dd;font-size:15.5px;margin:10px 0}
+.topic .sub{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--dim);margin:16px 0 6px}
+.topic ul{list-style:none;padding:0;margin:8px 0}
+.topic li{position:relative;padding-left:18px;margin:8px 0;color:#d7d7dd;font-size:15.5px}
+.topic li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--brand)}
+.formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:600;color:var(--brand2);
+  background:var(--card2);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:15px}
+
+/* FAQ */
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:10px 0;overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:700;font-size:16.5px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--brand);font-weight:800;font-size:20px;flex:0 0 auto}
+.faq details[open] summary::after{content:"–"}
+.faq details[open] summary{border-bottom:1px solid var(--line)}
+.faq .a{padding:14px 18px 18px;color:#d7d7dd;font-size:15.5px;line-height:1.65}
+.faq .a a{color:var(--brand)}
+.faqcat{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;color:var(--brand);margin:34px 0 6px}
+
 @media(max-width:560px){
   .hero h1{font-size:34px}.hero .tag{font-size:18px}
   h2{font-size:25px}.grid{grid-template-columns:1fr}

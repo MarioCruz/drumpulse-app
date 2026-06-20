@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DrumPulse FAQ — Apple Watch drumming tracker questions answered</title>
+<meta name="description" content="Answers about DrumPulse for Apple Watch: does it matter which hand wears the watch, how drum-hit detection works, accuracy, timing grading, Health workouts, privacy, and device support.">
+<link rel="canonical" href="https://mariocruz.github.io/drumpulse-app/faq.html">
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/style.css">
+<meta property="og:title" content="DrumPulse FAQ">
+<meta property="og:description" content="Does it matter which hand wears the watch? How does drum detection work? Is it accurate? Answered.">
+<meta property="og:image" content="assets/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Can an Apple Watch track drumming?","acceptedAnswer":{"@type":"Answer","text":"Yes. DrumPulse reads your wrist motion through the Apple Watch's built-in motion sensors, detects each drum hit, measures your tempo, grades your timing, and saves the session to Apple Health as a workout. No microphone, drum triggers, or extra hardware are needed — just the watch on your playing hand."}},
+    {"@type":"Question","name":"Does it matter which hand I wear the Apple Watch on for drumming?","acceptedAnswer":{"@type":"Answer","text":"For detecting hits, no — detection is hand-agnostic. DrumPulse measures the magnitude of your wrist's acceleration (the square root of x squared plus y squared plus z squared), which is the same on either wrist and at any orientation, so accuracy doesn't depend on the hand and there's nothing to configure. What the hand does decide is which voice you measure: the watch only sees the hand it's on. Wear it on your snare or backbeat hand to grade backbeats (best for most timing practice); wear it on your lead or hi-hat hand to track the faster ostinato stream. It's a coaching choice, not a setting."}},
+    {"@type":"Question","name":"How does DrumPulse detect drum hits?","acceptedAnswer":{"@type":"Answer","text":"It samples the watch's accelerometer and computes the magnitude of acceleration on each sample. A drum strike produces a sharp spike; DrumPulse peak-picks those spikes above an adjustable sensitivity threshold, with a short refractory window so a single hit isn't double-counted. Each detected hit gets a precise timestamp used for tempo and timing grading."}},
+    {"@type":"Question","name":"Can DrumPulse detect both hands or my feet?","acceptedAnswer":{"@type":"Answer","text":"No. The watch only senses the motion of the wrist it's worn on, so DrumPulse measures one hand — the hand wearing the watch. It does not track your other hand or your kick and hi-hat feet. This is why the watch hand determines which voice you're grading."}},
+    {"@type":"Question","name":"What is the fastest tempo DrumPulse can track?","acceptedAnswer":{"@type":"Answer","text":"Because it sees one hand, a short refractory window between hits caps how fast consecutive same-hand strikes can be told apart — about 125 BPM for continuous one-handed sixteenth notes. Alternating sticking is unaffected, since the watch hand plays every other note. If you pick a tempo and subdivision beyond what one wrist can resolve, the app warns you."}},
+    {"@type":"Question","name":"Is DrumPulse accurate?","acceptedAnswer":{"@type":"Answer","text":"For the hand it's on, yes — it timestamps hits to sub-sample precision and grades them against a sample-accurate metronome grid or your own groove. Accuracy depends on a good sensitivity setting, which the built-in calibration sets from your real strikes. Remember it measures one hand, so it reflects that hand's timing, not the whole kit."}},
+    {"@type":"Question","name":"Does drumming count as a workout on Apple Watch?","acceptedAnswer":{"@type":"Answer","text":"With DrumPulse, yes. Each session is saved to Apple Health as a workout with duration, heart rate, and active energy, so it contributes to your activity rings. Apple Health has no dedicated drumming type, so it appears as Other (branded Drumming) in the Fitness app."}},
+    {"@type":"Question","name":"Do I need an iPhone to use DrumPulse?","acceptedAnswer":{"@type":"Answer","text":"No. The watch app runs on its own — you can play, grade, and save sessions with just the Apple Watch. The optional iPhone companion app gives you a bigger screen to review sessions, trends, and per-song breakdowns, syncing over Apple's encrypted device-to-device connection."}},
+    {"@type":"Question","name":"What is the difference between Metronome and Free Play mode?","acceptedAnswer":{"@type":"Answer","text":"In Metronome mode you set a tempo and every hit is graded against a steady click, like a timing trainer. In Free Play mode there is no click — DrumPulse learns your own recent groove and flags when you speed up or slow down relative to yourself, which is ideal for open playing and gigs."}},
+    {"@type":"Question","name":"What do rushing and dragging mean?","acceptedAnswer":{"@type":"Answer","text":"Rushing means you played ahead of the beat (early); dragging means you played behind it (late). DrumPulse shows early as negative and late as positive, splits every graded hit into rushing, on-time, and dragging, and rolls it into a groove score from 0 to 100."}},
+    {"@type":"Question","name":"What is accent lag?","acceptedAnswer":{"@type":"Answer","text":"Accent lag measures whether your loud hits land at a different time than your soft ones, by comparing the average timing of your accents versus your ghost notes across the session. Positive means accents drag behind the beat, negative means they push ahead, and near zero means an even touch. It's a subtle habit the overall groove score can hide."}},
+    {"@type":"Question","name":"What are ghost, body, and accent in the dynamics report?","acceptedAnswer":{"@type":"Answer","text":"DrumPulse sorts every hit by strength into ghost (soft), body (medium), and accent (loud) — measured relative to your own playing strength, not a fixed volume. So a hard-hitting player isn't graded as all accents and a light player's taps aren't all ghosts. It shows the dynamic range in your playing."}},
+    {"@type":"Question","name":"Does DrumPulse work with acoustic drums, electronic kits, or a practice pad?","acceptedAnswer":{"@type":"Answer","text":"Yes. It senses your wrist motion, not sound, so it works on acoustic drums, electronic kits, and practice pads alike — anywhere your hand makes a striking motion. You can even practice on a pillow or your knee."}},
+    {"@type":"Question","name":"Is my data private?","acceptedAnswer":{"@type":"Answer","text":"Yes. DrumPulse has no accounts, no tracking, no analytics, and no servers. Your motion and heart-rate data are used on-device only and never leave it. Sessions sync solely between your own watch and iPhone over Apple's encrypted connection, and you can delete sessions or revoke permissions at any time."}},
+    {"@type":"Question","name":"Does DrumPulse track my heart rate and calories?","acceptedAnswer":{"@type":"Answer","text":"Yes. It shows your live heart rate while you play and estimates calories burned from a drumming activity value and your body weight, reading your body-mass sample from Apple Health when available. All of this happens on the watch."}},
+    {"@type":"Question","name":"How are sessions split into songs?","acceptedAnswer":{"@type":"Answer","text":"In Free Play, DrumPulse splits a long set at the silences between songs, then re-merges adjacent parts that stayed at the same tempo so a mid-song pause isn't counted as a new song. It's a best-guess estimate from wrist motion alone — a long mid-song pause or two songs at the same tempo can fool it — so treat the song count as approximate."}},
+    {"@type":"Question","name":"Which Apple Watch models does DrumPulse support?","acceptedAnswer":{"@type":"Answer","text":"DrumPulse runs on Apple Watch models on a recent watchOS version. Hands-free start by double-tapping your fingers requires Apple Watch Series 9, Series 10, or Ultra 2. It was developed and validated on Apple Watch Ultra 2."}},
+    {"@type":"Question","name":"Can I practice timing without a metronome click?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free Play mode grades you against your own established groove with no click, so it tells you when you drift faster or slower relative to yourself. Metronome mode also offers click dropout, which mutes the click for some bars so you practice holding time through silence and then checks how you re-enter."}}
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html" style="color:inherit"><img src="assets/icon.png" alt="DrumPulse icon">DrumPulse</a>
+    <nav>
+      <a href="how-it-works.html">How it works</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap faq" style="padding-top:46px;padding-bottom:50px">
+  <p class="eyebrow">FAQ</p>
+  <h1 style="font-size:36px;letter-spacing:-.8px;margin:0 0 10px">Frequently asked questions</h1>
+  <p class="lead">Everything about tracking drumming on your Apple Watch with DrumPulse — detection, timing, fitness, and privacy.</p>
+
+  <p class="faqcat">Basics</p>
+
+  <details open>
+    <summary>Can an Apple Watch track drumming?</summary>
+    <div class="a">Yes. DrumPulse reads your wrist motion through the Apple Watch's built-in motion sensors, detects each drum hit, measures your tempo, grades your timing, and saves the session to Apple Health as a workout. No microphone, drum triggers, or extra hardware are needed — just the watch on your playing hand.</div>
+  </details>
+
+  <details>
+    <summary>Do I need an iPhone to use DrumPulse?</summary>
+    <div class="a">No. The watch app runs on its own — you can play, grade, and save sessions with just the Apple Watch. The optional iPhone companion gives you a bigger screen to review sessions, trends, and per-song breakdowns, syncing over Apple's encrypted device-to-device connection.</div>
+  </details>
+
+  <details>
+    <summary>Does DrumPulse work with acoustic drums, electronic kits, or a practice pad?</summary>
+    <div class="a">Yes. It senses your wrist motion, not sound, so it works on acoustic drums, electronic kits, and practice pads alike — anywhere your hand makes a striking motion. You can even practice on a pillow or your knee.</div>
+  </details>
+
+  <details>
+    <summary>Which Apple Watch models does DrumPulse support?</summary>
+    <div class="a">DrumPulse runs on Apple Watch models on a recent watchOS version. Hands-free start by double-tapping your fingers requires Apple Watch Series 9, Series 10, or Ultra 2. It was developed and validated on Apple Watch Ultra 2.</div>
+  </details>
+
+  <p class="faqcat">Detection &amp; accuracy</p>
+
+  <details>
+    <summary>Does it matter which hand I wear the Apple Watch on for drumming?</summary>
+    <div class="a">For <strong>detecting</strong> hits, no — detection is hand-agnostic. DrumPulse measures the magnitude of your wrist's acceleration (√(x²+y²+z²)), which is the same on either wrist and at any orientation, so accuracy doesn't depend on the hand and there's nothing to configure. What the hand <em>does</em> decide is which voice you measure: the watch only sees the hand it's on. Wear it on your <strong>snare/backbeat hand</strong> to grade backbeats (best for most timing practice); wear it on your <strong>lead/hi-hat hand</strong> to track the faster ostinato stream. It's a coaching choice, not a setting. <a href="how-it-works.html">More in How it works →</a></div>
+  </details>
+
+  <details>
+    <summary>How does DrumPulse detect drum hits?</summary>
+    <div class="a">It samples the watch's accelerometer and computes the magnitude of acceleration on each sample. A drum strike produces a sharp spike; DrumPulse peak-picks those spikes above an adjustable sensitivity threshold, with a short refractory window so a single hit isn't double-counted. Each detected hit gets a precise timestamp used for tempo and timing grading.</div>
+  </details>
+
+  <details>
+    <summary>Can DrumPulse detect both hands or my feet?</summary>
+    <div class="a">No. The watch only senses the motion of the wrist it's worn on, so DrumPulse measures one hand — the hand wearing the watch. It does not track your other hand or your kick and hi-hat feet. This is why the watch hand determines which voice you're grading.</div>
+  </details>
+
+  <details>
+    <summary>What is the fastest tempo DrumPulse can track?</summary>
+    <div class="a">Because it sees one hand, a short refractory window between hits caps how fast consecutive same-hand strikes can be told apart — about 125 BPM for continuous one-handed sixteenth notes. Alternating sticking is unaffected, since the watch hand plays every other note. If you pick a tempo and subdivision beyond what one wrist can resolve, the app warns you.</div>
+  </details>
+
+  <details>
+    <summary>Is DrumPulse accurate?</summary>
+    <div class="a">For the hand it's on, yes — it timestamps hits to sub-sample precision and grades them against a sample-accurate metronome grid or your own groove. Accuracy depends on a good sensitivity setting, which the built-in calibration sets from your real strikes. Remember it measures one hand, so it reflects that hand's timing, not the whole kit.</div>
+  </details>
+
+  <details>
+    <summary>Can I practice timing without a metronome click?</summary>
+    <div class="a">Yes. Free Play mode grades you against your own established groove with no click, so it tells you when you drift faster or slower relative to yourself. Metronome mode also offers click dropout, which mutes the click for some bars so you practice holding time through silence and then checks how you re-enter.</div>
+  </details>
+
+  <p class="faqcat">Timing &amp; scoring</p>
+
+  <details>
+    <summary>What is the difference between Metronome and Free Play mode?</summary>
+    <div class="a">In Metronome mode you set a tempo and every hit is graded against a steady click, like a timing trainer. In Free Play mode there is no click — DrumPulse learns your own recent groove and flags when you speed up or slow down relative to yourself, which is ideal for open playing and gigs.</div>
+  </details>
+
+  <details>
+    <summary>What do rushing and dragging mean?</summary>
+    <div class="a">Rushing means you played ahead of the beat (early); dragging means you played behind it (late). DrumPulse shows early as negative and late as positive, splits every graded hit into rushing, on-time, and dragging, and rolls it into a groove score from 0 to 100.</div>
+  </details>
+
+  <details>
+    <summary>What is accent lag?</summary>
+    <div class="a">Accent lag measures whether your loud hits land at a different time than your soft ones, by comparing the average timing of your accents versus your ghost notes across the session. Positive means accents drag behind the beat, negative means they push ahead, and near zero means an even touch. It's a subtle habit the overall groove score can hide.</div>
+  </details>
+
+  <details>
+    <summary>What are ghost, body, and accent in the dynamics report?</summary>
+    <div class="a">DrumPulse sorts every hit by strength into ghost (soft), body (medium), and accent (loud) — measured relative to your own playing strength, not a fixed volume. So a hard-hitting player isn't graded as all accents and a light player's taps aren't all ghosts. It shows the dynamic range in your playing.</div>
+  </details>
+
+  <details>
+    <summary>How are sessions split into songs?</summary>
+    <div class="a">In Free Play, DrumPulse splits a long set at the silences between songs, then re-merges adjacent parts that stayed at the same tempo so a mid-song pause isn't counted as a new song. It's a best-guess estimate from wrist motion alone — a long mid-song pause or two songs at the same tempo can fool it — so treat the song count as approximate.</div>
+  </details>
+
+  <p class="faqcat">Fitness &amp; privacy</p>
+
+  <details>
+    <summary>Does drumming count as a workout on Apple Watch?</summary>
+    <div class="a">With DrumPulse, yes. Each session is saved to Apple Health as a workout with duration, heart rate, and active energy, so it contributes to your activity rings. Apple Health has no dedicated drumming type, so it appears as Other (branded Drumming) in the Fitness app.</div>
+  </details>
+
+  <details>
+    <summary>Does DrumPulse track my heart rate and calories?</summary>
+    <div class="a">Yes. It shows your live heart rate while you play and estimates calories burned from a drumming activity value and your body weight, reading your body-mass sample from Apple Health when available. All of this happens on the watch.</div>
+  </details>
+
+  <details>
+    <summary>Is my data private?</summary>
+    <div class="a">Yes. DrumPulse has no accounts, no tracking, no analytics, and no servers. Your motion and heart-rate data are used on-device only and never leave it. Sessions sync solely between your own watch and iPhone over Apple's encrypted connection, and you can delete sessions or revoke permissions at any time. See the <a href="privacy.html">privacy policy</a>.</div>
+  </details>
+
+  <p style="margin-top:34px"><a class="btn ghost" href="how-it-works.html">← How it works</a></p>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p>DrumPulse · Made by Mario The Maker · <a href="mailto:mario@mariocruz.net">mario@mariocruz.net</a></p>
+    <p><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a> · <a href="faq.html">FAQ</a> · <a href="privacy.html">Privacy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
