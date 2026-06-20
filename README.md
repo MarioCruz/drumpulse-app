@@ -3,7 +3,7 @@
 Public marketing + privacy + help pages for **DrumPulse** (Apple Watch drumming
 tracker). Plain static HTML, served by GitHub Pages.
 
-- **Live:** https://mariocruz.github.io/drumpulse-app/
+- **Live:** https://drumpulseapp.com/
 - **App repo:** private (`MarioCruz/DrumPulse`).
 
 ## Pages

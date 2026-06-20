@@ -23,4 +23,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://mariocruz.github.io/drumpulse-app/sitemap.xml
+Sitemap: https://drumpulseapp.com/sitemap.xml
