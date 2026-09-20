@@ -129,3 +129,11 @@ footer.site a{color:var(--dim)}
   .wshot img{width:140px}.wshot.lead img{width:168px}
   .watchrow{gap:18px}
 }
+
+/* How it works — one real screenshot crop per topic */
+.hiw{margin:18px 0 4px;max-width:420px}
+.hiw.w{max-width:190px}
+.hiw img{width:100%;display:block;border-radius:18px;border:1px solid var(--line);
+  box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.hiw.w img{border-radius:36px}
+.hiw .cap{font-size:13px;color:var(--dim);margin-top:10px;font-weight:600}
