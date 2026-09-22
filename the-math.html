@@ -16,11 +16,12 @@
 
 <header class="site">
   <div class="wrap">
-    <a class="brand" href="index.html" style="color:inherit"><img src="assets/icon.png" alt="DrumPulse icon">DrumPulse</a>
+    <a class="brand" href="index.html" style="color:inherit"><img src="assets/icon.png" alt="DrumPulse icon"><span class="bn">DrumPulse</span></a>
     <nav>
       <a href="how-it-works.html">How it works</a>
+      <a href="the-math.html">The math</a>
       <a href="faq.html">FAQ</a>
-      <a href="privacy.html">Privacy</a>
+      <a class="wide" href="privacy.html">Privacy</a>
     </nav>
   </div>
 </header>
@@ -29,6 +30,12 @@
   <p class="eyebrow">The math</p>
   <h1 style="font-size:36px;letter-spacing:-.8px;margin:0 0 10px">How a wrist flick becomes a score</h1>
   <p class="lead">These are the formulas the app actually runs, with the real numbers, and a worked example for each one. No black box: if a score surprises you, you can check it here.</p>
+  <div class="worked" style="max-width:620px">
+    <p class="k">Reading the symbols</p>
+    <p><strong>√</strong> means <strong>square root</strong>: the number that, multiplied by itself, gives the number under the sign. √9 = 3, because 3 × 3 = 9. √2.25 = 1.5, because 1.5 × 1.5 = 2.25.</p>
+    <p><strong>x²</strong> means <strong>x squared</strong>, x multiplied by itself: 3² = 9, and (−3)² = 9 too, since a negative times a negative is positive.</p>
+    <p>Squaring and square root undo each other. The formulas below square numbers to make them all positive and to weigh big misses more, then take the square root to get back to milliseconds or g.</p>
+  </div>
   <nav class="toc" aria-label="On this page">
     <a href="#detect">Detecting a hit</a>
     <a href="#metronome">Metronome timing</a>
@@ -47,6 +54,7 @@
     <h3><span class="ic">🥁</span> 1. Detecting a hit</h3>
     <p>The watch reads its accelerometer about <strong>100 times a second</strong>. Each reading is three numbers (x, y, z, in g). DrumPulse turns them into one number, the strength:</p>
     <div class="formula">strength = √(x² + y² + z²)</div>
+    <p>In words: square each of the three numbers, add them up, and take the square root. It's the same rule as Pythagoras (a² + b² = c²) in three directions, and it gives the overall size of the jolt whichever way the wrist is pointing.</p>
     <div class="worked">
       <p class="k">Example</p>
       <p>A reading of x = 2.1, y = −1.4, z = 0.9 gives √(4.41 + 1.96 + 0.81) = √7.18 = <strong>2.68 g</strong>.</p>
@@ -111,6 +119,7 @@
     <div class="formula">mean = (d₁ + d₂ + … + dₙ) ÷ n</div>
     <div class="formula">RMS = √((d₁² + d₂² + … + dₙ²) ÷ n)</div>
     <div class="formula">jitter = √(RMS² − mean²)</div>
+    <p>RMS stands for <strong>root mean square</strong>, which is the recipe read backwards: <strong>square</strong> every deviation, take the <strong>mean</strong> (average) of those squares, then the square <strong>root</strong>. Squaring stops early and late misses from cancelling out (−20 and +20 both become 400), and it makes one 60 ms miss count for more than three 20 ms ones.</p>
     <ul>
       <li><strong>Mean</strong> is your lean: which side of the beat you sit on, on average.</li>
       <li><strong>Jitter</strong> (steadiness) is how much you scatter around your own lean. You can be steady and still late.</li>

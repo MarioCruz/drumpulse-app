@@ -155,3 +155,12 @@ table.nums td.n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-ali
 .chart{margin:12px 0 4px;max-width:460px}
 .chart svg{width:100%;height:auto;display:block}
 .more{font-size:14.5px;font-weight:700}
+
+/* Top nav on phones: drop the footer-only links, then the wordmark */
+@media(max-width:560px){
+  header.site nav a{margin-left:14px;font-size:14.5px}
+  header.site nav a.wide{display:none}
+}
+@media(max-width:400px){
+  .brand .bn{display:none}
+}
