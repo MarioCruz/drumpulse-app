@@ -28,7 +28,7 @@
 <div class="wrap" style="padding-top:46px;padding-bottom:10px">
   <p class="eyebrow">How it works</p>
   <h1 style="font-size:36px;letter-spacing:-.8px;margin:0 0 10px">From wrist motion to a timing coach</h1>
-  <p class="lead">DrumPulse reads the motion of your snare hand, turns every strike into data, and gives you two things at once: a real fitness record and an honest report on your time. Here's what each part does.</p>
+  <p class="lead">DrumPulse reads the motion of your snare hand, turns every strike into data, and gives you two things at once: a real fitness record and an honest report on your time. Here's what each part does. For the exact formulas, see <a href="the-math.html">the math</a>.</p>
 </div>
 
 <div class="wrap" style="padding-bottom:50px">
@@ -63,7 +63,7 @@
 
   <div class="topic">
     <h3><span class="ic">🎯</span> Your timing &amp; groove score</h3>
-    <p>The <strong>groove score</strong> (0–100) rates how tight your timing was overall.</p>
+    <p>The <strong>groove score</strong> (0–100) rates how tight your timing was overall: 100 means your hits averaged within 15 ms of the beat, and it falls to 0 at 90 ms.</p>
     <ul>
       <li><strong>Rushing</strong> — you landed ahead of the beat (shown as −, early).</li>
       <li><strong>Dragging</strong> — you landed behind the beat (shown as +, late).</li>
@@ -71,18 +71,21 @@
     </ul>
     <p><strong>Mean deviation</strong> is your average lean, early or late. <strong>Steadiness (jitter)</strong> is how much your timing scatters around the beat — lower is tighter, even if your average looks perfect.</p>
     <figure class="hiw"><img src="assets/shots/hiw-score.png" alt="Groove score of 94 out of 100 with a mean deviation of minus 1.9 ms, and counts of rushing, on-time and dragging hits from a three-hour gig" loading="lazy"><figcaption class="cap">A real 3-hour gig: 94/100, leaning 1.9 ms early</figcaption></figure>
+    <p class="more"><a href="the-math.html#score">See the math →</a></p>
   </div>
 
   <div class="topic">
     <h3><span class="ic">📈</span> Accent lag</h3>
     <p>Do your loud hits land at a different time than your soft ones? Accent lag compares the average timing of your accents vs your ghost notes across the whole session. Positive means accents drag behind the beat; negative means they push ahead; near zero is an even touch. It's a common, hard-to-feel habit the groove score alone hides.</p>
     <figure class="hiw"><img src="assets/shots/hiw-accent.png" alt="Accent lag card reading plus 1 ms, meaning accents and ghost notes land together" loading="lazy"><figcaption class="cap">Accents and ghost notes landing together</figcaption></figure>
+    <p class="more"><a href="the-math.html#accent">See the math →</a></p>
   </div>
 
   <div class="topic">
     <h3><span class="ic">💪</span> Dynamics: ghost, body, accent</h3>
     <p>Every hit is sorted into <strong>ghost</strong> (soft), <strong>body</strong> (medium), and <strong>accent</strong> (loud) — measured relative to your own playing strength, not a fixed volume. So a hard hitter isn't graded as all-accents, and a light player's taps aren't all-ghosts. It shows the light and shade in a set.</p>
     <figure class="hiw"><img src="assets/shots/hiw-dynamics.png" alt="Dynamics bar split into 27 percent ghost notes, 60 percent body and 13 percent accents" loading="lazy"><figcaption class="cap">Ghost, body and accent share of the set</figcaption></figure>
+    <p class="more"><a href="the-math.html#dynamics">See the math →</a></p>
   </div>
 
   <div class="topic">
@@ -96,11 +99,13 @@
     <p>In Free Play, a long set is split into songs at the silences between them, then re-merged where the tempo stayed the same (so a mid-song pause isn't counted as a new song). Each row shows that song's tempo and average timing.</p>
     <p>It's a <strong>best-guess split, not exact</strong> — from wrist motion alone, a long mid-song pause or two songs at the same tempo can fool it. Treat the count as an estimate.</p>
     <figure class="hiw"><img src="assets/shots/hiw-songs.png" alt="Per-song list from a 28-song set, each with its tempo, timing lean, length, hit count and in-song tempo drift" loading="lazy"><figcaption class="cap">Every song gets its own row</figcaption></figure>
+    <p class="more"><a href="the-math.html#songs">See the math →</a></p>
   </div>
 
   <div class="topic">
     <h3><span class="ic">🔥</span> Effort</h3>
     <p>The physical side of the session — total hits, average tempo, duration, calories, heart rate, and <strong>hit power</strong> (your average peak acceleration, in g). These count every hit, warm-up included.</p>
+    <p class="more"><a href="the-math.html#effort">See how calories are calculated →</a></p>
   </div>
 
   <div class="topic">
@@ -131,13 +136,13 @@
     <p>No accounts, no tracking, no analytics, no servers. Motion and heart-rate data are used on-device only and never leave it; sessions sync solely between your own watch and iPhone over Apple's encrypted connection. See the <a href="privacy.html">privacy policy</a>.</p>
   </div>
 
-  <p style="margin-top:30px"><a class="btn ghost" href="faq.html">Read the FAQ →</a></p>
+  <p style="margin-top:30px"><a class="btn ghost" href="the-math.html">See the math →</a> <a class="btn ghost" href="faq.html">Read the FAQ →</a></p>
 </div>
 
 <footer class="site">
   <div class="wrap">
     <p>DrumPulse · Made by Mario The Maker · <a href="mailto:mario@mariothemaker.com">mario@mariothemaker.com</a></p>
-    <p><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a> · <a href="faq.html">FAQ</a> · <a href="privacy.html">Privacy</a></p>
+    <p><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a> · <a href="the-math.html">The math</a> · <a href="faq.html">FAQ</a> · <a href="privacy.html">Privacy</a></p>
   </div>
 </footer>
 

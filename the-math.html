@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The math behind DrumPulse — how your groove score is calculated</title>
+<meta name="description" content="The exact formulas DrumPulse uses: hit detection from wrist acceleration, timing deviation against a click or your own groove, jitter, RMS, the 0–100 groove score, dynamics, accent lag, song splitting and calories — each with a worked example.">
+<link rel="canonical" href="https://drumpulseapp.com/the-math.html">
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/style.css">
+<meta property="og:title" content="The math behind DrumPulse">
+<meta property="og:description" content="How a wrist flick becomes a groove score, with the real formulas and worked examples.">
+<meta property="og:image" content="assets/og.png">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html" style="color:inherit"><img src="assets/icon.png" alt="DrumPulse icon">DrumPulse</a>
+    <nav>
+      <a href="how-it-works.html">How it works</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:46px;padding-bottom:10px">
+  <p class="eyebrow">The math</p>
+  <h1 style="font-size:36px;letter-spacing:-.8px;margin:0 0 10px">How a wrist flick becomes a score</h1>
+  <p class="lead">These are the formulas the app actually runs, with the real numbers, and a worked example for each one. No black box: if a score surprises you, you can check it here.</p>
+  <nav class="toc" aria-label="On this page">
+    <a href="#detect">Detecting a hit</a>
+    <a href="#metronome">Metronome timing</a>
+    <a href="#freeplay">Free Play timing</a>
+    <a href="#score">Mean, jitter &amp; score</a>
+    <a href="#dynamics">Dynamics</a>
+    <a href="#accent">Accent lag</a>
+    <a href="#songs">Songs &amp; drift</a>
+    <a href="#effort">Calories &amp; heart rate</a>
+  </nav>
+</div>
+
+<div class="wrap" style="padding-bottom:50px">
+
+  <div class="topic" id="detect">
+    <h3><span class="ic">🥁</span> 1. Detecting a hit</h3>
+    <p>The watch reads its accelerometer about <strong>100 times a second</strong>. Each reading is three numbers (x, y, z, in g). DrumPulse turns them into one number, the strength:</p>
+    <div class="formula">strength = √(x² + y² + z²)</div>
+    <div class="worked">
+      <p class="k">Example</p>
+      <p>A reading of x = 2.1, y = −1.4, z = 0.9 gives √(4.41 + 1.96 + 0.81) = √7.18 = <strong>2.68 g</strong>.</p>
+    </div>
+    <p>A hit is a <strong>peak</strong> in that strength that rises above your threshold. The Sensitivity slider (0 to 1) sets the threshold:</p>
+    <div class="formula">threshold (g) = 1.6 − 1.15 × sensitivity</div>
+    <p>So sensitivity 0 needs 1.6 g, sensitivity 1 needs only 0.45 g, and the default of 0.8 needs <strong>0.68 g</strong>. <strong>Calibration</strong> does this for you: you strike 8 times, and it sets the threshold to 70% of your softest strike, so even that one clears it.</p>
+    <div class="sub">Cleaning up the peak</div>
+    <ul>
+      <li><strong>Two bumps, one hit.</strong> A real strike often shows a small bump just before the big one, about 85 ms earlier. DrumPulse holds each candidate for 120 ms and keeps the stronger bump.</li>
+      <li><strong>No double counts.</strong> After a hit, anything within 120 ms is treated as the stick ringing out. That is why one hand tops out at 16th notes around 125 BPM: 4 notes a beat × 120 ms = 480 ms, and 60 ÷ 0.48 = 125.</li>
+      <li><strong>Finer than 10 ms.</strong> Samples are 10 ms apart, so the true peak usually falls between two of them. A parabola through the top three samples estimates where it really was.</li>
+      <li><strong>Latency correction.</strong> The measured peak lands a little after the stick meets the head. DrumPulse subtracts about 25 ms (15 ms of peak lag plus one sample) so the timestamp is the moment of contact.</li>
+    </ul>
+  </div>
+
+  <div class="topic" id="metronome">
+    <h3><span class="ic">⏱️</span> 2. Metronome timing: distance to the nearest gridline</h3>
+    <p>With the click on, every hit gets a <strong>deviation</strong>: how far it landed from the nearest gridline, in milliseconds. Early is negative (rushing), late is positive (dragging).</p>
+    <div class="formula">beat length = 60 ÷ BPM</div>
+    <div class="formula">deviation = hit time − nearest gridline</div>
+    <p>Gridlines are the beats plus the subdivision you're playing: eighths put a line halfway through each beat, triplets at ⅓ and ⅔, sixteenths every quarter beat. On <em>Auto</em>, DrumPulse picks the subdivision from the spacing of your recent hits, so a busy eighth-note groove isn't graded as if you were missing quarter notes.</p>
+    <p>A hit within <strong>±30 ms</strong> of its gridline counts as on time. That's a tight human ±20 ms plus the ±10 ms the sensor itself can't resolve.</p>
+    <div class="worked">
+      <p class="k">Example at 120 BPM, eighth notes</p>
+      <p>A beat is 60 ÷ 120 = 500 ms, so the gridlines are every 250 ms: 0, 250, 500, 750…</p>
+      <p>A hit at 1,482 ms is nearest the 1,500 ms line: 1,482 − 1,500 = <strong>−18 ms</strong>. That's 18 ms early, inside ±30, so it's <strong>on time</strong>.</p>
+      <p>A hit at 1,535 ms: +35 ms, outside ±30, so it's <strong>dragging</strong>.</p>
+    </div>
+    <p>The grid is timed to when you <strong>hear</strong> the click, not when the watch sends it to the speaker. Audio output has its own delay (Bluetooth headphones add a lot), and you play to what reaches your ears, so the watch measures that delay and shifts the grid by it.</p>
+  </div>
+
+  <div class="topic" id="freeplay">
+    <h3><span class="ic">🎶</span> 3. Free Play timing: you against your own groove</h3>
+    <p>With no click there's no grid to measure against, so Free Play asks a different question: <strong>is your beat getting shorter or longer than the groove you set?</strong></p>
+    <div class="sub">Step 1: your current tempo</div>
+    <p>DrumPulse looks at the gaps between your hits. Each gap is matched to a note value (16th, triplet, eighth, quarter, dotted quarter, half, whole) and converted into the beat length it implies. Your current tempo is the <strong>median of the last 8</strong>. A median shrugs off the odd missed or extra hit, which an average can't.</p>
+    <div class="sub">Step 2: your groove (the baseline)</div>
+    <p>Your groove is a slow running average of that tempo. Each new reading nudges it 10% of the way:</p>
+    <div class="formula">groove = 0.9 × groove + 0.1 × current tempo</div>
+    <p>So a few fast hits barely move it, but a steady push shows up over about 20 hits.</p>
+    <div class="sub">Step 3: the deviation</div>
+    <div class="formula">deviation = (60 ÷ current BPM − 60 ÷ groove BPM) × 1000 ms</div>
+    <p>That's the difference in beat length. On time is within <strong>3% of your groove's beat</strong>.</p>
+    <div class="worked">
+      <p class="k">Example: groove settled at 120 BPM</p>
+      <p>The groove's beat is 500 ms, so on time is within ±15 ms (3% of 500).</p>
+      <p>You speed up to 123 BPM: a beat of 487.8 ms, so the deviation is <strong>−12.2 ms</strong>. That's inside ±15, so it's <strong>on time</strong>.</p>
+      <p>You push to 126 BPM: a beat of 476.2 ms, so <strong>−23.8 ms</strong>, and that's <strong>rushing</strong>.</p>
+    </div>
+    <div class="sub">Guard rails</div>
+    <ul>
+      <li><strong>Half-time and double-time aren't drift.</strong> If the tempo reading jumps to 2×, ½, 3:2 or another musical multiple of your groove, it's folded back first. Going from quarters to eighths isn't rushing.</li>
+      <li><strong>A big jump is a new groove.</strong> If the folded tempo is still more than 12% off, that's a new section or a new song, not drift. The groove restarts there and that hit isn't graded.</li>
+      <li><strong>Silence resets it.</strong> More than 5 s without a hit (or a pause) starts a fresh groove. The first couple of hits of each new groove aren't graded while it settles.</li>
+    </ul>
+  </div>
+
+  <div class="topic" id="score">
+    <h3><span class="ic">🎯</span> 4. Mean, jitter, and the groove score</h3>
+    <p>Every graded hit has a deviation <em>d</em>. Over the session, DrumPulse rolls them into three numbers:</p>
+    <div class="formula">mean = (d₁ + d₂ + … + dₙ) ÷ n</div>
+    <div class="formula">RMS = √((d₁² + d₂² + … + dₙ²) ÷ n)</div>
+    <div class="formula">jitter = √(RMS² − mean²)</div>
+    <ul>
+      <li><strong>Mean</strong> is your lean: which side of the beat you sit on, on average.</li>
+      <li><strong>Jitter</strong> (steadiness) is how much you scatter around your own lean. You can be steady and still late.</li>
+      <li><strong>RMS</strong> is your overall distance from the beat, and it counts both. That's why RMS² = mean² + jitter².</li>
+    </ul>
+    <p>The <strong>groove score</strong> comes from RMS:</p>
+    <div class="formula">score = 100 − (RMS − 15) ÷ 75 × 100, kept between 0 and 100</div>
+    <p>An RMS of 15 ms or less scores 100. That's about the limit of what a wrist sensor sampling every 10 ms can resolve, so tighter than that can't be measured. The score falls in a straight line to 0 at 90 ms.</p>
+    <figure class="chart">
+      <svg viewBox="0 0 460 230" role="img" aria-label="Groove score against RMS: flat at 100 up to 15 ms, then a straight line down to 0 at 90 ms. The worked example, RMS 22.7 ms, scores 90.">
+        <g stroke="#2a2a31" stroke-width="1">
+          <line x1="40" y1="20" x2="440" y2="20"/><line x1="40" y1="100" x2="440" y2="100"/><line x1="40" y1="180" x2="440" y2="180"/>
+        </g>
+        <g fill="#8c8c96" font-size="12" font-family="-apple-system,BlinkMacSystemFont,sans-serif">
+          <text x="32" y="24" text-anchor="end">100</text><text x="32" y="104" text-anchor="end">50</text><text x="32" y="184" text-anchor="end">0</text>
+          <text x="40" y="200" text-anchor="middle">0</text><text x="100" y="200" text-anchor="middle">15</text><text x="160" y="200" text-anchor="middle">30</text><text x="280" y="200" text-anchor="middle">60</text><text x="400" y="200" text-anchor="middle">90 ms</text>
+          <text x="240" y="222" text-anchor="middle">RMS distance from the beat</text>
+        </g>
+        <polyline points="40,20 100,20 400,180 440,180" fill="none" stroke="#ff8a3d" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="130.8" cy="36.4" r="5" fill="#ff4d6d" stroke="#000" stroke-width="2"/>
+        <text x="142" y="40" fill="#f4f4f7" font-size="12.5" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,sans-serif">example: 22.7 ms → 90</text>
+      </svg>
+    </figure>
+    <div class="worked">
+      <p class="k">Example: five hits</p>
+      <table class="nums">
+        <tr><th>Hit</th><th style="text-align:right">Deviation</th><th>Verdict (±30 ms)</th></tr>
+        <tr><td>1</td><td class="n">−35 ms</td><td>rushing</td></tr>
+        <tr><td>2</td><td class="n">+10 ms</td><td>on time</td></tr>
+        <tr><td>3</td><td class="n">−25 ms</td><td>on time</td></tr>
+        <tr><td>4</td><td class="n">+20 ms</td><td>on time</td></tr>
+        <tr><td>5</td><td class="n">−15 ms</td><td>on time</td></tr>
+      </table>
+      <p>Mean = −45 ÷ 5 = <strong>−9 ms</strong> (leaning early).</p>
+      <p>RMS = √((1225 + 100 + 625 + 400 + 225) ÷ 5) = √515 = <strong>22.7 ms</strong>.</p>
+      <p>Jitter = √(515 − 81) = √434 = <strong>20.8 ms</strong>.</p>
+      <p>Score = 100 − (22.7 − 15) ÷ 75 × 100 = <strong>90</strong>.</p>
+    </div>
+    <div class="worked">
+      <p class="k">Why RMS, not jitter</p>
+      <p>A drummer who lands every hit exactly 40 ms late has a jitter of 0, perfectly steady. But they're never on the beat. Their RMS is 40 ms, so they score <strong>67</strong>, not 100.</p>
+    </div>
+    <table class="nums">
+      <tr><th>RMS</th><th style="text-align:right">Score</th></tr>
+      <tr><td>15 ms or less</td><td class="n">100</td></tr>
+      <tr><td>20 ms</td><td class="n">93</td></tr>
+      <tr><td>30 ms</td><td class="n">80</td></tr>
+      <tr><td>40 ms</td><td class="n">67</td></tr>
+      <tr><td>52.5 ms</td><td class="n">50</td></tr>
+      <tr><td>90 ms or more</td><td class="n">0</td></tr>
+    </table>
+    <p>Two more counts ride along: the rushing / on-time / dragging split (from the verdicts above), and your <strong>best on-time streak</strong>, the longest run of consecutive on-time hits.</p>
+  </div>
+
+  <div class="topic" id="dynamics">
+    <h3><span class="ic">💪</span> 5. Dynamics: ghost, body, accent</h3>
+    <p>DrumPulse keeps a running "normal" strength for you, a slow average where each hit counts 5%. Every hit is then sorted against it:</p>
+    <ul>
+      <li><strong>Ghost</strong>: below 0.6 × normal</li>
+      <li><strong>Body</strong>: in between</li>
+      <li><strong>Accent</strong>: above 1.6 × normal</li>
+    </ul>
+    <div class="worked">
+      <p class="k">Example</p>
+      <p>If your normal is 2.0 g, a ghost note is anything under 1.2 g and an accent anything over 3.2 g. A player whose normal is 4.0 g gets 2.4 g and 6.4 g. Everyone is measured against their own touch.</p>
+    </div>
+    <p><strong>Dynamic range</strong> is your average accent strength divided by your average ghost strength. "2.9× soft → loud" means your accents hit almost three times as hard as your ghosts. It's shown once each tier has at least 5 hits.</p>
+  </div>
+
+  <div class="topic" id="accent">
+    <h3><span class="ic">📈</span> 6. Accent lag</h3>
+    <p>Using the same ghost/accent split, DrumPulse averages the timing deviation of each group separately:</p>
+    <div class="formula">accent lag = mean deviation of accents − mean deviation of ghosts</div>
+    <div class="worked">
+      <p class="k">Example from a real gig</p>
+      <p>Accents averaged +2.11 ms, ghosts +1.36 ms: lag = 2.11 − 1.36 = <strong>+0.75 ms</strong>. That's an even touch.</p>
+      <p>If accents averaged +12 ms and ghosts +2 ms, the lag would be +10 ms: your big hits sit behind your little ones, a common habit that the overall score hides because the two average out.</p>
+    </div>
+    <p>It needs at least 5 graded ghosts and 5 graded accents. It covers the whole session, not a sample of it.</p>
+  </div>
+
+  <div class="topic" id="songs">
+    <h3><span class="ic">🎼</span> 7. Songs, set arc, and in-song drift</h3>
+    <div class="sub">Splitting a set into songs (Free Play)</div>
+    <ul>
+      <li>A silence longer than <strong>5 s</strong> ends a song.</li>
+      <li>Two neighbouring pieces are glued back together if their tempos are within <strong>3%</strong> of each other and the gap was under 90 s. A new song needs a silence <em>and</em> a tempo change.</li>
+      <li>Pieces with fewer than 30 hits or under 60 s don't get their own row. Their hits still count in the session totals.</li>
+    </ul>
+    <div class="worked">
+      <p class="k">Example</p>
+      <p>Pieces at 124, 125 and 120 BPM with short gaps: 124 → 125 differ by under 1%, so they merge into one song. 125 → 120 differ by 4%, so a new song starts.</p>
+    </div>
+    <div class="sub">In-song drift</div>
+    <p>Within each song, DrumPulse fits a straight line through your tempo over time (least squares). The slope is how many BPM you gained or lost per minute: "pushes +2/min" means the song got about 2 BPM faster every minute. Within ±1 BPM/min counts as steady. It needs a song of at least 90 s, and implausible fits (steeper than ±30 BPM/min) are discarded rather than shown.</p>
+    <div class="sub">Set arc</div>
+    <p>The session is cut into one-minute slices, and each slice gets its own mean deviation, tempo and strength. The captions describe the range where most of the set lived (the 10th to 90th percentile), so one odd minute can't claim "tempo ranged 82–149" when every song sat at 110–120. The chart still draws that odd minute.</p>
+    <div class="sub">Playing time</div>
+    <p>Any gap under 5 s between hits counts as playing; longer gaps count as rest. "Playing 78% of set" is the playing time divided by the session length.</p>
+  </div>
+
+  <div class="topic" id="effort">
+    <h3><span class="ic">🔥</span> 8. Calories and heart rate</h3>
+    <p>Calories use the standard MET formula, with your weight and the Intensity setting (MET):</p>
+    <div class="formula">kcal per minute = MET × 3.5 × weight (kg) ÷ 200</div>
+    <div class="worked">
+      <p class="k">Example</p>
+      <p>A 226 lb (102.5 kg) drummer at MET 5.7: 5.7 × 3.5 × 102.5 ÷ 200 = <strong>10.2 kcal a minute</strong>, or about <strong>614 kcal</strong> for an hour of playing.</p>
+    </div>
+    <p>Paused time isn't counted. This is an estimate from time and intensity, not from your hits, so set Intensity to match how hard you play (the app's default is 4.0).</p>
+    <p><strong>Heart-rate zones</strong> use percent of max heart rate (220 − age): Zone 1 under 60%, Zone 2 60–70%, Zone 3 70–80%, Zone 4 80–90%, Zone 5 90% and up.</p>
+    <p><strong>Heart-rate recovery</strong> is your median heart rate over the 30 s before your last hit, minus your median from 50 to 70 s after it. A drop from 120 to 95 is a recovery of 25 bpm. Wrist readings can glitch, so a result is shown only when it's believable (no more than 60 bpm).</p>
+    <p><strong>Hit power</strong> is simply the average strength of your hits, in g.</p>
+  </div>
+
+  <p style="margin-top:30px"><a class="btn ghost" href="how-it-works.html">← How it works</a> <a class="btn ghost" href="faq.html">Read the FAQ →</a></p>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p>DrumPulse · Made by Mario The Maker · <a href="mailto:mario@mariothemaker.com">mario@mariothemaker.com</a></p>
+    <p><a href="index.html">Home</a> · <a href="how-it-works.html">How it works</a> · <a href="the-math.html">The math</a> · <a href="faq.html">FAQ</a> · <a href="privacy.html">Privacy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
