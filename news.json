@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "id": "2026-10-feedback-1",
+      "title": "What should DrumPulse do next?",
+      "body": "I'm Mario, the drummer who builds DrumPulse. I play about 6 hours a week when I'm not gigging, and I use it every time. I'd love to hear what you'd add, what it misses, or what the score gets wrong. And follow @drumpulseapp on Instagram for news on what's coming.",
+      "button": "Send feedback",
+      "action": "feedback",
+      "minSessions": 3
+    }
+  ]
+}
