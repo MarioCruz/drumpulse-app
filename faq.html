@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>DrumPulse FAQ — Apple Watch drumming tracker questions answered</title>
+<title>DrumPulse (Drum Pulse) FAQ — Apple Watch drumming tracker questions answered</title>
 <meta name="description" content="Answers about DrumPulse for Apple Watch: drumming practice and timing, drumming as cardio and calories burned, tracking workouts in Apple Health, drum-hit detection, accuracy, privacy, and device support.">
 <link rel="canonical" href="https://drumpulseapp.com/faq.html">
 <link rel="icon" href="assets/icon.png">
 <link rel="stylesheet" href="assets/style.css">
+<meta property="og:site_name" content="DrumPulse">
 <meta property="og:title" content="DrumPulse FAQ">
 <meta property="og:description" content="Does it matter which hand wears the watch? How does drum detection work? Is it accurate? Answered.">
 <meta property="og:image" content="assets/og.png">
@@ -16,6 +17,9 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {"@type":"Question","name":"What is DrumPulse?","acceptedAnswer":{"@type":"Answer","text":"DrumPulse (sometimes written Drum Pulse) is an Apple Watch and iPhone app for drummers. It detects your drum hits from wrist motion, measures your tempo, grades your timing against a metronome or your own groove, and saves each session to Apple Health as a workout with heart rate and calories. It needs no microphone, drum triggers, or extra hardware."}},
+    {"@type":"Question","name":"How much does DrumPulse cost?","acceptedAnswer":{"@type":"Answer","text":"DrumPulse is $3.99 on the App Store for iPhone and Apple Watch, with no subscription, no ads, and no account."}},
+    {"@type":"Question","name":"Where can I download DrumPulse?","acceptedAnswer":{"@type":"Answer","text":"DrumPulse is on the App Store at apps.apple.com/app/id6782245341. It installs on your iPhone and runs on your paired Apple Watch."}},
     {"@type":"Question","name":"Can an Apple Watch track drumming?","acceptedAnswer":{"@type":"Answer","text":"Yes. DrumPulse reads your wrist motion through the Apple Watch's built-in motion sensors, detects each drum hit, measures your tempo, grades your timing, and saves the session to Apple Health as a workout. No microphone, drum triggers, or extra hardware are needed — just the watch on your playing hand."}},
     {"@type":"Question","name":"Does it matter which hand I wear the Apple Watch on for drumming?","acceptedAnswer":{"@type":"Answer","text":"For detecting hits, no — detection is hand-agnostic. DrumPulse measures the magnitude of your wrist's acceleration (the square root of x squared plus y squared plus z squared), which is the same on either wrist and at any orientation, so accuracy doesn't depend on the hand and there's nothing to configure. What the hand does decide is which voice you measure: the watch only sees the hand it's on. Wear it on your snare or backbeat hand to grade backbeats (best for most timing practice); wear it on your lead or hi-hat hand to track the faster ostinato stream. It's a coaching choice, not a setting."}},
     {"@type":"Question","name":"How does DrumPulse detect drum hits?","acceptedAnswer":{"@type":"Answer","text":"It samples the watch's accelerometer and computes the magnitude of acceleration on each sample. A drum strike produces a sharp spike; DrumPulse peak-picks those spikes above an adjustable sensitivity threshold, with a short refractory window so a single hit isn't double-counted. Each detected hit gets a precise timestamp used for tempo and timing grading."}},
@@ -79,6 +83,21 @@
   <p class="faqcat">Basics</p>
 
   <details open>
+    <summary>What is DrumPulse?</summary>
+    <div class="a">DrumPulse (sometimes written Drum Pulse) is an Apple Watch and iPhone app for drummers. It detects your drum hits from wrist motion, measures your tempo, grades your timing against a metronome or your own groove, and saves each session to Apple Health as a workout with heart rate and calories. It needs no microphone, drum triggers, or extra hardware.</div>
+  </details>
+
+  <details>
+    <summary>How much does DrumPulse cost?</summary>
+    <div class="a">DrumPulse is $3.99 on the App Store for iPhone and Apple Watch, with no subscription, no ads, and no account.</div>
+  </details>
+
+  <details>
+    <summary>Where can I download DrumPulse?</summary>
+    <div class="a">DrumPulse is on the App Store at <a href="https://apps.apple.com/app/id6782245341">apps.apple.com/app/id6782245341</a>. It installs on your iPhone and runs on your paired Apple Watch.</div>
+  </details>
+
+  <details>
     <summary>Can an Apple Watch track drumming?</summary>
     <div class="a">Yes. DrumPulse reads your wrist motion through the Apple Watch's built-in motion sensors, detects each drum hit, measures your tempo, grades your timing, and saves the session to Apple Health as a workout. No microphone, drum triggers, or extra hardware are needed — just the watch on your playing hand.</div>
   </details>
