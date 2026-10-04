@@ -19,7 +19,9 @@ a:hover{text-decoration:underline}
 header.site{position:sticky;top:0;z-index:20;
   background:rgba(10,10,12,.78);backdrop-filter:saturate(160%) blur(20px);
   border-bottom:1px solid var(--line)}
-header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:960px;gap:16px}
+header.site nav{display:flex;align-items:center;white-space:nowrap;overflow-x:auto;scrollbar-width:none;min-width:0}
+header.site nav::-webkit-scrollbar{display:none}
 .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;letter-spacing:-.3px}
 .brand img{width:30px;height:30px;border-radius:8px}
 header.site nav a{color:var(--dim);font-weight:600;font-size:15px;margin-left:20px}
@@ -161,6 +163,7 @@ table.nums td.n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-ali
   header.site nav a{margin-left:14px;font-size:14.5px}
   header.site nav a.wide{display:none}
 }
-@media(max-width:400px){
+@media(max-width:560px){
   .brand .bn{display:none}
+  header.site nav{-webkit-mask-image:linear-gradient(to right,#000 82%,transparent);mask-image:linear-gradient(to right,#000 82%,transparent);padding-right:18px}
 }
