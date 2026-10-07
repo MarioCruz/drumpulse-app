@@ -56,7 +56,7 @@
 <div class="wrap" style="padding-bottom:50px">
 
   <div class="topic" id="detect">
-    <h3><span class="ic">🥁</span> 1. Detecting a hit</h3>
+    <h2><span class="ic">🥁</span> 1. Detecting a hit</h2>
     <p>The watch reads its accelerometer about <strong>100 times a second</strong>. Each reading is three numbers (x, y, z, in g). DrumPulse turns them into one number, the strength:</p>
     <div class="formula">strength = √(x² + y² + z²)</div>
     <p>In words: square each of the three numbers, add them up, and take the square root. It's the same rule as Pythagoras (a² + b² = c²) in three directions, and it gives the overall size of the jolt whichever way the wrist is pointing.</p>
@@ -77,7 +77,7 @@
   </div>
 
   <div class="topic" id="metronome">
-    <h3><span class="ic">⏱️</span> 2. Metronome timing: distance to the nearest gridline</h3>
+    <h2><span class="ic">⏱️</span> 2. Metronome timing: distance to the nearest gridline</h2>
     <p>With the click on, every hit gets a <strong>deviation</strong>: how far it landed from the nearest gridline, in milliseconds. Early is negative (rushing), late is positive (dragging).</p>
     <div class="formula">beat length = 60 ÷ BPM</div>
     <div class="formula">deviation = hit time − nearest gridline</div>
@@ -93,7 +93,7 @@
   </div>
 
   <div class="topic" id="freeplay">
-    <h3><span class="ic">🎶</span> 3. Free Play timing: you against your own groove</h3>
+    <h2><span class="ic">🎶</span> 3. Free Play timing: you against your own groove</h2>
     <p>With no click there's no grid to measure against, so Free Play asks a different question: <strong>is your beat getting shorter or longer than the groove you set?</strong></p>
     <div class="sub">Step 1: your current tempo</div>
     <p>DrumPulse looks at the gaps between your hits. Each gap is matched to a note value (16th, triplet, eighth, quarter, dotted quarter, half, whole) and converted into the beat length it implies. Your current tempo is the <strong>median of the last 8</strong>. A median shrugs off the odd missed or extra hit, which an average can't.</p>
@@ -119,7 +119,7 @@
   </div>
 
   <div class="topic" id="score">
-    <h3><span class="ic">🎯</span> 4. Mean, jitter, and the groove score</h3>
+    <h2><span class="ic">🎯</span> 4. Mean, jitter, and the groove score</h2>
     <p>Every graded hit has a deviation <em>d</em>. Over the session, DrumPulse rolls them into three numbers:</p>
     <div class="formula">mean = (d₁ + d₂ + … + dₙ) ÷ n</div>
     <div class="formula">RMS = √((d₁² + d₂² + … + dₙ²) ÷ n)</div>
@@ -180,7 +180,7 @@
   </div>
 
   <div class="topic" id="dynamics">
-    <h3><span class="ic">💪</span> 5. Dynamics: ghost, body, accent</h3>
+    <h2><span class="ic">💪</span> 5. Dynamics: ghost, body, accent</h2>
     <p>DrumPulse keeps a running "normal" strength for you, a slow average where each hit counts 5%. Every hit is then sorted against it:</p>
     <ul>
       <li><strong>Ghost</strong>: below 0.6 × normal</li>
@@ -195,7 +195,7 @@
   </div>
 
   <div class="topic" id="accent">
-    <h3><span class="ic">📈</span> 6. Accent lag</h3>
+    <h2><span class="ic">📈</span> 6. Accent lag</h2>
     <p>Using the same ghost/accent split, DrumPulse averages the timing deviation of each group separately:</p>
     <div class="formula">accent lag = mean deviation of accents − mean deviation of ghosts</div>
     <div class="worked">
@@ -207,7 +207,7 @@
   </div>
 
   <div class="topic" id="songs">
-    <h3><span class="ic">🎼</span> 7. Songs, set arc, and in-song drift</h3>
+    <h2><span class="ic">🎼</span> 7. Songs, set arc, and in-song drift</h2>
     <div class="sub">Splitting a set into songs (Free Play)</div>
     <ul>
       <li>A silence longer than <strong>5 s</strong> ends a song.</li>
@@ -227,7 +227,7 @@
   </div>
 
   <div class="topic" id="effort">
-    <h3><span class="ic">🔥</span> 8. Calories and heart rate</h3>
+    <h2><span class="ic">🔥</span> 8. Calories and heart rate</h2>
     <p>Calories use the standard MET formula, with your weight and the Intensity setting (MET):</p>
     <div class="formula">kcal per minute = MET × 3.5 × weight (kg) ÷ 200</div>
     <div class="worked">
@@ -235,9 +235,19 @@
       <p>A 226 lb (102.5 kg) drummer at MET 5.7: 5.7 × 3.5 × 102.5 ÷ 200 = <strong>10.2 kcal a minute</strong>, or about <strong>614 kcal</strong> for an hour of playing.</p>
     </div>
     <p>Paused time isn't counted. This is an estimate from time and intensity, not from your hits, so set Intensity to match how hard you play (the app's default is 4.0).</p>
-    <p><strong>Heart-rate zones</strong> use percent of max heart rate (220 − age): Zone 1 under 60%, Zone 2 60–70%, Zone 3 70–80%, Zone 4 80–90%, Zone 5 90% and up.</p>
+    <p><strong>Heart-rate zones</strong> use percent of max <a href="drumming-cardio.html">heart rate</a> (220 − age): Zone 1 under 60%, Zone 2 60–70%, Zone 3 70–80%, Zone 4 80–90%, Zone 5 90% and up.</p>
     <p><strong>Heart-rate recovery</strong> is your median heart rate over the 30 s before your last hit, minus your median from 50 to 70 s after it. A drop from 120 to 95 is a recovery of 25 bpm. Wrist readings can glitch, so a result is shown only when it's believable (no more than 60 bpm).</p>
     <p><strong>Hit power</strong> is simply the average strength of your hits, in g.</p>
+  </div>
+
+  <div class="topic">
+    <h2><span class="ic">📚</span> Keep reading</h2>
+    <ul>
+      <li><a href="drum-timing.html">How to improve your drum timing</a>: practical drills for the numbers above.</li>
+      <li><a href="how-it-works.html">How DrumPulse works</a>: the same ideas without the formulas.</li>
+      <li><a href="drumming-cardio.html">Drumming cardio</a>: the fitness side of the effort section.</li>
+      <li><a href="drum-rudiments.html">The 40 drum rudiments</a>: patterns to run through the scoring.</li>
+    </ul>
   </div>
 
   <p style="margin-top:30px"><a class="btn ghost" href="how-it-works.html">← How it works</a> <a class="btn ghost" href="faq.html">Read the FAQ →</a></p>
@@ -246,7 +256,7 @@
 <footer class="site">
   <div class="wrap">
     <p>DrumPulse · Made by Mario The Maker · <a href="mailto:mario@mariothemaker.com">mario@mariothemaker.com</a></p>
-    <p><a href="/">Home</a> · <a href="first-session.html">First session</a> · <a href="how-it-works.html">How it works</a> · <a href="drumming-cardio.html">Drumming cardio</a> · <a href="drum-cardio-tempo.html">Cardio tempo</a> · <a href="drum-rudiments.html">Drum rudiments</a> · <a href="the-math.html">The math</a> · <a href="faq.html">FAQ</a> · <a href="privacy.html">Privacy</a></p>
+    <p><a href="/">Home</a> · <a href="first-session.html">First session</a> · <a href="how-it-works.html">How it works</a> · <a href="drum-timing.html">Drum timing</a> · <a href="drumming-cardio.html">Drumming cardio</a> · <a href="drum-cardio-tempo.html">Cardio tempo</a> · <a href="practice-pad-workout.html">Pad workout</a> · <a href="drum-rudiments.html">Drum rudiments</a> · <a href="the-math.html">The math</a> · <a href="faq.html">FAQ</a> · <a href="privacy.html">Privacy</a></p>
   </div>
 </footer>
 

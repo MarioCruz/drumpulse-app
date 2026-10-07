@@ -82,6 +82,8 @@ footer.site a{color:var(--dim)}
 .topic{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}
 .topic h3{display:flex;align-items:center;gap:10px;font-size:18px;margin:0 0 10px}
 .topic h3 .ic{font-size:22px}
+.topic h2{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:750;letter-spacing:0;margin:0 0 10px}
+.topic h2 .ic{font-size:22px}
 .topic p{color:#d7d7dd;font-size:15.5px;margin:10px 0}
 .topic .sub{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--dim);margin:16px 0 6px}
 .topic ul{list-style:none;padding:0;margin:8px 0}
