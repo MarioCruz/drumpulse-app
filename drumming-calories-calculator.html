@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Drumming Calories Calculator: Calories Burned Drumming | DrumPulse</title>
+<meta name="description" content="Free drumming calories calculator. Enter your weight, how long you played and how hard, and see calories burned drumming, with the formula, a reference table and numbers from a real three hour gig.">
+<link rel="canonical" href="https://drumpulseapp.com/drumming-calories-calculator.html">
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/style.css">
+<meta property="og:site_name" content="DrumPulse">
+<meta property="og:title" content="Drumming calories calculator: how many calories does drumming burn?">
+<meta property="og:description" content="Calories burned drumming from your weight, playing time and intensity. The same formula DrumPulse uses on Apple Watch.">
+<meta property="og:image" content="assets/og.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://drumpulseapp.com/drumming-calories-calculator.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Drumming calories calculator: how many calories does drumming burn?",
+      "description": "A free calculator for calories burned drumming, from your weight, playing time and intensity, with the formula, a reference table and a real three hour gig.",
+      "author": {
+        "@type": "Person",
+        "name": "Mario Cruz"
+      },
+      "mainEntityOfPage": "https://drumpulseapp.com/drumming-calories-calculator.html",
+      "datePublished": "2026-11-25",
+      "dateModified": "2026-11-25",
+      "publisher": {
+        "@type": "Organization",
+        "name": "DrumPulse",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://drumpulseapp.com/assets/icon.png"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How many calories does drumming burn in an hour?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends mostly on your body weight and how hard you play. With the standard MET formula, a 170 lb (77 kg) drummer burns about 243 calories an hour at an easy practice pace (3 METs), about 324 at a moderate pace (4 METs), and about 486 in a hard, nonstop set (6 METs). Heavier players burn more and lighter players burn less."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the drumming calorie estimate calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calculator uses the standard MET formula: calories per minute = MET × 3.5 × body weight in kilograms ÷ 200. MET is a measure of intensity, where 1 MET is sitting at rest. Multiply the per-minute figure by the minutes you actually played."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What intensity (MET) should I pick for drumming?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Exercise scientists call roughly 3 to 6 METs moderate and above 6 vigorous. Easy pad practice with plenty of stops sits near 3, steady playing through songs is around 4, and a loud, fast, nonstop set is 5 to 6 or more. If you wear a heart-rate monitor, let your heart rate guide you: the harder it is working, the higher the value."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I count breaks between songs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Leave out the long ones. Short gaps between songs make little difference, but a set break spent talking or resting burns far less, so counting it at a drumming intensity overstates the total. In DrumPulse, pause the session for a break and that time is left out."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this the same number DrumPulse shows on Apple Watch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, it is the same formula. DrumPulse uses your weight and its Intensity setting, which defaults to 4.0, and saves the result to Apple Health as active energy with the workout. The app adds the things a calculator cannot: it times the session for you, leaves out the time you pause, and records your heart rate and your timing."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;margin-top:6px}
+.calc label{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--dim);margin:0 0 6px}
+.calc input[type=number]{width:100%;box-sizing:border-box;background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--txt);font:inherit;font-size:18px;font-weight:700;padding:10px 12px}
+.calc input[type=range]{width:100%;accent-color:var(--brand)}
+.calc .row{display:flex;gap:8px;align-items:center}
+.calc .full{grid-column:1/-1}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;flex:0 0 auto}
+.seg button,.presets button{font:inherit;font-size:14px;font-weight:700;color:var(--dim);background:none;border:0;padding:10px 12px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--card2);color:var(--txt)}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.presets button{border:1px solid var(--line);border-radius:999px;padding:7px 12px}
+.presets button[aria-pressed=true]{border-color:var(--brand);color:var(--txt)}
+.result{margin-top:18px;background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--brand2);border-radius:12px;padding:16px 18px}
+.result .big{font-size:40px;font-weight:800;letter-spacing:-1px;line-height:1.1;color:var(--txt)}
+.result .big span{font-size:17px;font-weight:700;color:var(--dim);letter-spacing:0}
+.result p{margin:6px 0 0;color:var(--dim);font-size:14.5px}
+.metv{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--brand2);font-weight:700}
+.tablewrap{overflow-x:auto}
+@media(max-width:560px){.calc{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/" style="color:inherit"><img src="assets/icon.png" alt="DrumPulse icon"><span class="bn">DrumPulse</span></a>
+    <nav>
+      <a href="how-it-works.html">How it works</a>
+      <a href="first-session.html">First session</a>
+      <a href="drumming-cardio.html">Drum cardio</a>
+      <a href="drum-rudiments.html">Rudiments</a>
+      <a href="drum-cardio-tempo.html">Cardio BPM</a>
+      <a href="the-math.html">The math</a>
+      <a href="faq.html">FAQ</a>
+      <a class="wide" href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:46px;padding-bottom:10px">
+  <p class="eyebrow">Calories</p>
+  <h1 style="font-size:36px;letter-spacing:-.8px;margin:0 0 10px">Drumming calories calculator</h1>
+  <p class="lead">How many calories does drumming burn? It depends on three things: what you weigh, how long you played, and how hard. Put in your numbers and see. This is the same formula DrumPulse uses on Apple Watch.</p>
+</div>
+
+<div class="wrap" style="padding-bottom:50px">
+
+  <div class="topic">
+    <h2><span class="ic">🔥</span> Calories burned drumming</h2>
+    <form class="calc" id="calc" onsubmit="return false">
+      <div>
+        <label for="w">Body weight</label>
+        <div class="row">
+          <input id="w" type="number" inputmode="decimal" min="1" step="any" value="170" aria-describedby="unitlabel">
+          <div class="seg" role="group" aria-label="Weight unit" id="unitlabel">
+            <button type="button" id="u-lb" aria-pressed="true">lb</button>
+            <button type="button" id="u-kg" aria-pressed="false">kg</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="m">Minutes played</label>
+        <input id="m" type="number" inputmode="decimal" min="1" step="any" value="60">
+      </div>
+      <div class="full">
+        <label for="met">Intensity: <span class="metv" id="metv">4.0</span> METs</label>
+        <input id="met" type="range" min="2" max="8" step="0.1" value="4">
+        <div class="presets" role="group" aria-label="Intensity presets">
+          <button type="button" data-met="3">Easy practice</button>
+          <button type="button" data-met="4" aria-pressed="true">Steady playing</button>
+          <button type="button" data-met="5">Rehearsal or gig</button>
+          <button type="button" data-met="6">Hard, nonstop</button>
+        </div>
+      </div>
+    </form>
+    <div class="result" aria-live="polite">
+      <div class="big"><b id="out">324</b> <span>calories</span></div>
+      <p id="sub">About 5.4 calories a minute, or 324 an hour, for a 170 lb drummer at 4.0 METs.</p>
+    </div>
+    <p style="font-size:14px;color:var(--dim)">Nothing you type leaves this page. The numbers are worked out in your browser and are not saved or sent anywhere.</p>
+  </div>
+
+  <div class="topic">
+    <h2><span class="ic">🧮</span> The formula</h2>
+    <div class="formula">kcal per minute = MET × 3.5 × weight (kg) ÷ 200</div>
+    <p><strong>MET</strong> stands for metabolic equivalent. One MET is the energy you use sitting still. Exercise scientists call roughly 3 to 6 METs moderate and anything above 6 vigorous. Drumming moves across that whole range, which is why one fixed "calories per hour" number is never right for everyone.</p>
+    <div class="worked">
+      <p class="k">Example</p>
+      <p>A 170 lb (77.1 kg) drummer at 4 METs: 4 × 3.5 × 77.1 ÷ 200 = <strong>5.4 calories a minute</strong>, or about <strong>324 calories</strong> for an hour of playing.</p>
+    </div>
+    <p>The full set of formulas DrumPulse uses, for timing as well as calories, is on <a href="the-math.html">the math page</a>.</p>
+  </div>
+
+  <div class="topic">
+    <h2><span class="ic">📊</span> Calories burned drumming, by weight and time</h2>
+    <p>Steady playing at 4 METs, which is the DrumPulse default.</p>
+    <div class="tablewrap">
+    <table class="nums">
+      <tr><th>Body weight</th><th style="text-align:right">30 min</th><th style="text-align:right">60 min</th><th style="text-align:right">90 min</th><th style="text-align:right">2 hours</th></tr>
+      <tr><td>120 lb (54 kg)</td><td class="n">114</td><td class="n">229</td><td class="n">343</td><td class="n">457</td></tr>
+      <tr><td>140 lb (64 kg)</td><td class="n">133</td><td class="n">267</td><td class="n">400</td><td class="n">533</td></tr>
+      <tr><td>160 lb (73 kg)</td><td class="n">152</td><td class="n">305</td><td class="n">457</td><td class="n">610</td></tr>
+      <tr><td>180 lb (82 kg)</td><td class="n">171</td><td class="n">343</td><td class="n">514</td><td class="n">686</td></tr>
+      <tr><td>200 lb (91 kg)</td><td class="n">191</td><td class="n">381</td><td class="n">572</td><td class="n">762</td></tr>
+      <tr><td>220 lb (100 kg)</td><td class="n">210</td><td class="n">419</td><td class="n">629</td><td class="n">838</td></tr>
+      <tr><td>240 lb (109 kg)</td><td class="n">229</td><td class="n">457</td><td class="n">686</td><td class="n">914</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="topic">
+    <h2><span class="ic">📈</span> How much does intensity change it?</h2>
+    <p>The same 170 lb drummer, one hour of playing, at different efforts.</p>
+    <div class="tablewrap">
+    <table class="nums">
+      <tr><th>How it feels</th><th style="text-align:right">METs</th><th style="text-align:right">Calories per hour</th></tr>
+      <tr><td>Easy pad practice, lots of stops</td><td class="n">3.0</td><td class="n">243</td></tr>
+      <tr><td>Steady playing through songs</td><td class="n">4.0</td><td class="n">324</td></tr>
+      <tr><td>Rehearsal or gig, few breaks</td><td class="n">5.0</td><td class="n">405</td></tr>
+      <tr><td>Loud, fast, nonstop set</td><td class="n">6.0</td><td class="n">486</td></tr>
+      <tr><td>All-out, double bass, no rests</td><td class="n">7.0</td><td class="n">567</td></tr>
+    </table>
+    </div>
+    <p>These labels are rough guides, not lab measurements. Your <a href="drum-cardio-tempo.html">heart rate</a> is the better judge: if it stays low, pick a lower value, and if a set leaves you breathing hard, pick a higher one.</p>
+  </div>
+
+  <div class="topic">
+    <h2><span class="ic">🥁</span> A real gig, measured</h2>
+    <p>One night behind the kit with a five-piece cover band: a session of <strong>2 hours, 40 minutes and 35 seconds</strong> with the set breaks paused out, logged by DrumPulse as <strong>1,642 calories</strong>. That was a 226 lb drummer at an intensity of 5.7.</p>
+    <p>Enter 226 lb, 160.6 minutes and 5.7 in the calculator above and you get the same 1,642. A long gig is a long, loud cardio session where you happen to also be playing songs. <a href="drumming-cardio.html">More on drumming as cardio →</a></p>
+  </div>
+
+  <div class="topic">
+    <h2><span class="ic">⌚</span> Let your watch do the counting</h2>
+    <p>A calculator needs you to guess how long you really played. DrumPulse times the session for you, leaves out any time you pause, shows your live heart rate, and saves the workout to Apple Health so it counts toward your Move ring. It also grades your timing, so one session tells you how hard you worked and how well you played.</p>
+    <p style="margin-top:14px"><a class="btn" href="https://apps.apple.com/app/id6782245341">Get DrumPulse on the App Store →</a></p>
+  </div>
+
+  <div class="callout"><b>Note:</b> This is an estimate from body weight, time and intensity, not a measurement of your metabolism. It is general fitness information, not medical advice.</div>
+
+  <p class="faqcat">Drumming calorie questions</p>
+
+  <details>
+    <summary>How many calories does drumming burn in an hour?</summary>
+    <div class="a">It depends mostly on your body weight and how hard you play. With the standard MET formula, a 170 lb (77 kg) drummer burns about 243 calories an hour at an easy practice pace (3 METs), about 324 at a moderate pace (4 METs), and about 486 in a hard, nonstop set (6 METs). Heavier players burn more and lighter players burn less.</div>
+  </details>
+
+  <details>
+    <summary>How is the drumming calorie estimate calculated?</summary>
+    <div class="a">The calculator uses the standard MET formula: calories per minute = MET × 3.5 × body weight in kilograms ÷ 200. MET is a measure of intensity, where 1 MET is sitting at rest. Multiply the per-minute figure by the minutes you actually played.</div>
+  </details>
+
+  <details>
+    <summary>What intensity (MET) should I pick for drumming?</summary>
+    <div class="a">Exercise scientists call roughly 3 to 6 METs moderate and above 6 vigorous. Easy pad practice with plenty of stops sits near 3, steady playing through songs is around 4, and a loud, fast, nonstop set is 5 to 6 or more. If you wear a heart-rate monitor, let your heart rate guide you: the harder it is working, the higher the value.</div>
+  </details>
+
+  <details>
+    <summary>Should I count breaks between songs?</summary>
+    <div class="a">Leave out the long ones. Short gaps between songs make little difference, but a set break spent talking or resting burns far less, so counting it at a drumming intensity overstates the total. In DrumPulse, pause the session for a break and that time is left out.</div>
+  </details>
+
+  <details>
+    <summary>Is this the same number DrumPulse shows on Apple Watch?</summary>
+    <div class="a">Yes, it is the same formula. DrumPulse uses your weight and its Intensity setting, which defaults to 4.0, and saves the result to Apple Health as active energy with the workout. The app adds the things a calculator cannot: it times the session for you, leaves out the time you pause, and records your heart rate and your timing.</div>
+  </details>
+
+  <div class="topic">
+    <h2><span class="ic">📚</span> Keep reading</h2>
+    <ul>
+      <li><a href="drumming-cardio.html">Drumming workout and drum cardio</a>: how hard drumming really is, and a 30-minute session.</li>
+      <li><a href="drum-cardio-tempo.html">What tempo for drum cardio</a>: hits per minute and heart-rate zones.</li>
+      <li><a href="practice-pad-workout.html">A 20-minute practice pad workout</a>: no kit needed.</li>
+      <li><a href="the-math.html">The math behind DrumPulse</a>: every formula, with worked examples.</li>
+    </ul>
+  </div>
+
+  <p style="margin-top:34px"><a class="btn ghost" href="drumming-cardio.html">Drum cardio →</a> <a class="btn ghost" href="drum-cardio-tempo.html">What tempo? →</a> <a class="btn ghost" href="faq.html">More questions in the FAQ →</a></p>
+</div>
+
+<script>
+(function(){
+  var LB_PER_KG=2.2046226218;            // same constant as the app
+  var unit='lb', $=function(id){return document.getElementById(id)};
+  var w=$('w'), m=$('m'), met=$('met');
+  function kcal(metv,kg,mins){ return metv*3.5*kg/200*mins; }   // ACSM MET formula, as in the app
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function draw(){
+    var wt=parseFloat(w.value), mins=parseFloat(m.value), mv=parseFloat(met.value);
+    $('metv').textContent=mv.toFixed(1);
+    var ps=document.querySelectorAll('.presets button');
+    for(var i=0;i<ps.length;i++) ps[i].setAttribute('aria-pressed', Math.abs(parseFloat(ps[i].dataset.met)-mv)<0.05);
+    if(!(wt>0)||!(mins>0)){ $('out').textContent='0'; $('sub').textContent='Enter your weight and how many minutes you played.'; return; }
+    var kg=unit==='lb'?wt/LB_PER_KG:wt, perMin=kcal(mv,kg,1);
+    $('out').textContent=fmt(perMin*mins);
+    $('sub').textContent='About '+perMin.toFixed(1)+' calories a minute, or '+fmt(perMin*60)+' an hour, for a '+wt+' '+unit+' drummer at '+mv.toFixed(1)+' METs.';
+  }
+  function setUnit(u){
+    if(u===unit) return;
+    var wt=parseFloat(w.value);
+    if(wt>0) w.value=Math.round(u==='kg'?wt/LB_PER_KG:wt*LB_PER_KG);
+    unit=u;
+    $('u-lb').setAttribute('aria-pressed',u==='lb'); $('u-kg').setAttribute('aria-pressed',u==='kg');
+    draw();
+  }
+  $('u-lb').onclick=function(){setUnit('lb')}; $('u-kg').onclick=function(){setUnit('kg')};
+  w.oninput=m.oninput=met.oninput=draw;
+  var ps=document.querySelectorAll('.presets button');
+  for(var i=0;i<ps.length;i++) ps[i].onclick=function(){ met.value=this.dataset.met; draw(); };
+  draw();
+})();
+</script>
+
+<footer class="site">
+  <div class="wrap">
+    <p>DrumPulse · Made by Mario The Maker · <a class="em" href="#" data-u="mario" data-d="mariothemaker.com">mario [at] mariothemaker [dot] com</a></p>
+    <p><a href="/">Home</a> · <a href="first-session.html">First session</a> · <a href="drumming-cardio.html">Drumming cardio</a> · <a href="drum-cardio-tempo.html">Cardio BPM</a> · <a href="drumming-calories-calculator.html">Calorie calculator</a> · <a href="practice-pad-workout.html">Pad workout</a> · <a href="drum-rudiments.html">Drum rudiments</a> · <a href="how-it-works.html">How it works</a> · <a href="drum-timing.html">Drum timing</a> · <a href="drum-practice-routine.html">Practice routine</a> · <a href="the-math.html">The math</a> · <a href="faq.html">FAQ</a> · <a href="privacy.html">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="assets/em.js" defer></script>
+</body>
+</html>

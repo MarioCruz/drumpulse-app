@@ -9,6 +9,7 @@ tracker). Plain static HTML, served by GitHub Pages.
 ## Pages
 - `index.html` — landing page (+ `SoftwareApplication` JSON-LD)
 - `how-it-works.html` — full feature explainer, mirrors the in-app Help & Guide
+- `drumming-calories-calculator.html` — calories-burned calculator (inline JS, no network, nothing stored; same MET formula and lb/kg constant as the app)
 - `faq.html` — SEO/AI FAQ with `FAQPage` JSON-LD structured data
 - `privacy.html` — privacy policy (the URL used in App Store Connect)
 - `assets/` — `style.css`, icon, og image
